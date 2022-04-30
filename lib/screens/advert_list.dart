@@ -1,5 +1,6 @@
 import 'dart:convert' as cnv;
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:theluxuryshoplaravelbackend/screens/models/advert.dart';
@@ -17,7 +18,6 @@ class _AdvertListState extends State<AdvertList> {
   List<Adverts>? model;
 
   Future<void> getData() async {
-    //Uri url = Uri.https('jsonplaceholder.typicode.com', '/posts');
     Uri url = Uri.https('91f6-41-90-71-22.ngrok.io', 'api/adverts');
 
     http.Response res = await http.get(url);
@@ -58,13 +58,14 @@ class _AdvertListState extends State<AdvertList> {
                     borderRadius: const BorderRadius.all(Radius.circular(24.0)),
                     child: Column(
                       children: [
-                        AspectRatio(
-                          aspectRatio: 2.0,
-                          child: Image.network(
-                            /*"assets/about1.jpg",*/
-                            "https://91f6-41-90-71-22.ngrok.io/public/Images/materials/abc/${model![index].image.toString()}",
-                            fit: BoxFit.cover,
-                          ),
+                        CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) =>
+                              const CircularProgressIndicator(),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
+                          imageUrl:
+                              "https://91f6-41-90-71-22.ngrok.io/public/Images/materials/abc/${model![index].image.toString()}",
                         ),
                         Container(
                           color:

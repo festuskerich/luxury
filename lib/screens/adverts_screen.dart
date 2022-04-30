@@ -51,7 +51,17 @@ class _AdvertsScreenState extends State<AdvertsScreen> {
                   margin: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      const SizedBox(height: 15.0),
+                      const CircleAvatar(
+                        radius: 28.0,
+                        backgroundColor: Colors.orange,
+                        child: Icon(
+                          Icons.campaign_outlined,
+                          size: 35,
+                          color: Colors.white,
+                        ),
+                      ),
+                      const SizedBox(height: 10.0),
+
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
