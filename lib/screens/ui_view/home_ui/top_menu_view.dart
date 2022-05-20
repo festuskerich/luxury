@@ -1,10 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:theluxuryshoplaravelbackend/app_theme.dart';
 import 'package:theluxuryshoplaravelbackend/screens/screens.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-class TopMenuView extends StatelessWidget {
+class TopMenuView extends StatefulWidget {
   final AnimationController animationController;
   final Animation<double> animation;
 
@@ -13,15 +14,39 @@ class TopMenuView extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<TopMenuView> createState() => _TopMenuViewState();
+}
+
+class _TopMenuViewState extends State<TopMenuView> {
+  void launchWhatsApp({
+    required String phone,
+    required String message,
+  }) async {
+    String url()  {
+      if (Platform.isAndroid) {
+        return "https://wa.me/$phone/?text=${Uri.parse(message)} ";
+      } else {
+        return "https://api.whatsapp.com/send?phone=$phone=${Uri.parse(message)}";
+      }
+    }
+
+    if (await canLaunchUrl(url() as Uri)) {
+      await launchUrl(url() as Uri);
+    } else {
+      throw 'Could not launch ${url()}';
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: animationController,
+      animation: widget.animationController,
       builder: (context, child) {
         return FadeTransition(
-          opacity: animation,
+          opacity: widget.animation,
           child: Transform(
             transform: Matrix4.translationValues(
-                0.0, 30 * (1.0 - animation.value), 0.0),
+                0.0, 30 * (1.0 - widget.animation.value), 0.0),
             child: Column(
               children: [
                 Container(
@@ -98,11 +123,8 @@ class TopMenuView extends StatelessWidget {
                                 children: [
                                   InkWell(
                                     onTap: () async {
-                                      if (await canLaunch('tel:0810000274')) {
-                                        await launch('tel:0810000274');
-                                      } else {
-                                        throw 'Could not launch Dialer';
-                                      }
+                                      var phone = "254792095190";
+                                      launchWhatsApp(phone: phone, message: "message");
                                     },
                                     child: const CircleAvatar(
                                       radius: 23.0,

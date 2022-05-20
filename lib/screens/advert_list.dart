@@ -18,7 +18,7 @@ class _AdvertListState extends State<AdvertList> {
   List<Adverts>? model;
 
   Future<void> getData() async {
-    Uri url = Uri.https('91f6-41-90-71-22.ngrok.io', 'api/adverts');
+    Uri url = Uri.https('absolutegroup.co.ke', 'api/adverts');
 
     http.Response res = await http.get(url);
     List<dynamic> body = cnv.jsonDecode(res.body);
@@ -65,7 +65,7 @@ class _AdvertListState extends State<AdvertList> {
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                           imageUrl:
-                              "https://91f6-41-90-71-22.ngrok.io/public/Images/materials/abc/${model![index].image.toString()}",
+                              "https://absolutegroup.co.ke/public/Images/materials/${model![index].image.toString()}",
                         ),
                         Container(
                           color:

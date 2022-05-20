@@ -21,21 +21,10 @@ class SelectedMaterial extends StatefulWidget {
 class _SelectedMaterialState extends State<SelectedMaterial> {
   List<MaterialImages>? model;
   final String imageBaseUrl =
-      "https://91f6-41-90-71-22.ngrok.io/public/Images/materials";
-
-  /*Future<void> getMaterials() async {
-    //Uri url = Uri.https('jsonplaceholder.typicode.com', '/posts');
-    Uri url = Uri.https('91f6-41-90-71-22.ngrok.io', 'api/fetchMaterials');
-
-    http.Response res = await http.get(url);
-    List<dynamic> body = cnv.jsonDecode(res.body);
-    model = body.map((dynamic item) => Materials.fromJson(item)).toList();
-    setState(() {});
-  }*/
-
+      "https://absolutegroup.co.ke/public/Images/materials";
   Future getMaterials(String material_category) async {
     final response = await http.post(
-      Uri.parse('https://91f6-41-90-71-22.ngrok.io/api/fetchMaterials'),
+      Uri.parse('https://absolutegroup.co.ke/api/fetchMaterials'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
@@ -134,7 +123,7 @@ class _SelectedMaterialState extends State<SelectedMaterial> {
                             MaterialPageRoute(
                                 builder: (context) => MaterialInfoScreen(
                                       imageUrl:
-                                          '$imageBaseUrl/abc/${model![index].material_image}',
+                                          '$imageBaseUrl/${model![index].material_image}',
                                       materialname: model![index]
                                           .material_name
                                           .toString(),
@@ -164,7 +153,7 @@ class _SelectedMaterialState extends State<SelectedMaterial> {
                               errorWidget: (context, url, error) =>
                                   const Icon(Icons.error),
                               imageUrl:
-                                  '$imageBaseUrl/abc/${model![index].material_image}',
+                                  '$imageBaseUrl/${model![index].material_category}/${model![index].material_image}',
                             )),
                       );
                     },

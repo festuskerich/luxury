@@ -23,7 +23,7 @@ class AboutUsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding:  const EdgeInsets.only(bottom: 10),
               decoration: BoxDecoration(
                 color: Colors.yellow[9000],
                 borderRadius: const BorderRadius.only(
@@ -94,13 +94,15 @@ class AboutUsScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 60.0),
-                    Text(
-                      'Informations de contact',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30.0,
-                          letterSpacing: 2.0,
-                          color: Colors.black),
+                    Center(
+                      child: Text(
+                        'Informations de contact',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30.0,
+                            letterSpacing: 2.0,
+                            color: Colors.black),
+                      ),
                     ),
                     SizedBox(height: 15.0),
                     Center(
